@@ -46,13 +46,12 @@
             </div>
         </div>
         <div>
+            <button class="Dropbtn" id="accountbtn" onclick="Showdd('account')">
             @guest
-                <button class="Dropbtn" id="accountbtn" onclick="SHowdd('account')">
-                <h4>Hello, Sign in</h4>
-                <h4>Accounts & Lists</h4>
-                </button>
+            <h4>Hello, Sign in</h4>
             @endguest
-            
+            <h4>Accounts & Lists</h4>
+            </button>   
             <div class="Dropdown" id="accountdd">
                 <div>
                     @guest
@@ -81,7 +80,7 @@
             <img src="" alt="">
             <h4>0</h4>
             </div>
-            <h4>Cart</h4>
+            <a class="link" href="/view/cart">Cart</a>
         </div>
     </div>
     <div class="bop-nav">
@@ -99,7 +98,8 @@
             </div>
         </div>
         <a href="#"><button>Today's deals</button></a>
-        <a href="#"><button>Sell</button></a>
+        <a href="sell"><button>Sell</button></a>
     </div>
+    {{$slot}}
 </body>
 </html>
