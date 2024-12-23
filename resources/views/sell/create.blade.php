@@ -1,5 +1,5 @@
 <x-layout> 
-    <form method="post" action="/buzzon/public/edit/create" enctype="multipart/form-data">
+    <form method="post" action="/buzzon/public/sell" enctype="multipart/form-data">
         @csrf
         <div>
         <label for="name">Name:</label>
@@ -8,7 +8,7 @@
 
         <div>
         <label for="subcategory">Select category:</label>
-        <select name="subcategory" id="subcategory">
+        <select name="category" id="category">
             @foreach($subcats as $subcat)
             <option value="{{$subcat->id}}">{{$subcat->name}}</option>
             @endforeach

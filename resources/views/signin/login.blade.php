@@ -1,4 +1,6 @@
+@stack('login')
 <x-layout></x-layout>
+    <div id="sign-up-container">
     <form  method="post" action="/buzzon/public/register">
     @csrf
         <div>
@@ -29,6 +31,9 @@
         <div class="mt-5">
         <input class="bg-orange-900 px-2 font-bold py-2 border border-black-200 rounded" value="Signup" type="submit">
         </div>
+
+        <button id="sign-in-button">Sign in!</button>
+
         @if($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -39,7 +44,10 @@
         </div>
         @endif
     </form>
+    </div>
 
+
+    <div  id="sign-in-container">
     <form  method="POST"action="/buzzon/public/login">
     @csrf
         <div>
@@ -55,5 +63,8 @@
         <div class="mt-5">
         <input class="bg-orange-900 px-2 font-bold py-2 border border-black-200 rounded" value="Signin" type="submit">
         </div>
+
+        <button id="sign-up-button">Sign up!</button>
     </form>
+    </div>
 </html>

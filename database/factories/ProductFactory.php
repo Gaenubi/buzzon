@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use App\Models\Cat;
 use App\Models\Subcat;
 use App\Models\Product;
+use App\Models\Seller;
 
 
 /**
@@ -29,9 +30,12 @@ class ProductFactory extends Factory
     {
         return [
             'name' => fake()->sentence(),
-            'subcat_id'  => Subcat::find(rand(1,10)),
+            'subcat_id'  => Subcat::find(rand(1,15)),
+            'seller_id'  => Seller::find(rand(1,5)),
             'description' => fake()->sentence(),
             'quantity' => rand(1,60),
+            'price' => fake()->randomFloat($nbMaxDecimals = 5, $min = 40, $max = 80),
+            'discount_price' => NULL,
             'image' => 'logo.jpg',
         ];
     }
@@ -39,12 +43,6 @@ class ProductFactory extends Factory
     /**
      * Indicate that the model's email address should be unverified.
      */
-    public function green(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'image' => 'GreenAbstract.jpg',
-        ]);
-    }
 
     public function ivy(): static
     {

@@ -29,7 +29,7 @@ class SubcatFactory extends Factory
     {
         return [
             'name' => fake()->word(),
-            'cat_id'  => Cat::find(rand(1,2)),
+            'cat_id'  => Cat::find(rand(1,4)),
         ];
     }
 

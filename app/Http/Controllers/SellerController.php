@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Stripe\Stripe;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
@@ -38,7 +39,7 @@ class SellerController extends Controller
 
     public function create()
     {
-        if(Auth::guest){
+        if(Auth::guest()){
             return view('signin.login');
         }
         
@@ -52,14 +53,37 @@ class SellerController extends Controller
             'image' => 'required'
         ]);
 
+        $stripe = new \Stripe\StripeClient('sk_test_51QQSdCIxnJH43pQ4zTuulVLZ5LzGysSMF8dGINEZRv0kVOpG4oA9wSO53GzRzNjJxz3ToZ7zv9vXihY4NNSj70a700znjfyXDD');
+
+        $products = Product::where('stripe_id', NULL)->get();
+
+        foreach ($products as $product){
+
+            $new = $stripe->products->create(['name' => $product->name,
+                                        'description' => $product->description,
+                                        'default_price_data' => ['currency' => 'usd',
+                                                                 'unit_amount' => $product->price * 100]]);
+
+            $product->stripe_id = $new->id;
+            $product->save();
+
+        }
+        $new = $stripe->products->create(['name' => $request->name,
+                                    'description' => $request->description,
+                                    'default_price_data' => ['currency' => 'usd',
+                                                                'unit_amount' => $request->price * 100]]);
+
+
         $newImageName = $product->id.$request->name.'.'.$request->image->extension();
         $request->image->move(public_path('img'), $newImageName);
-        
+       
+
         $product = new Product();
         $product->name = request('name');
         $product->price = request('price');
         $product->subcat_id = request('category');
         $product->seller_id = Auth::user()->seller_id;
+        $product->stripe_id = $new->id;
         $product->discount_price = request('discount_price');
         $product->description = request('description');
         $product->image = $newImageName;

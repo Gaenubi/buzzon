@@ -19,4 +19,8 @@ class Subcat extends Model
     public function products(){
         return $this->hasMany(Product::class);
     }
+
+    public function product(){
+        return $this->products()->one()->ofMany();
+    }
 }

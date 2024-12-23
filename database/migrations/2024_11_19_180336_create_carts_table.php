@@ -24,9 +24,9 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignIdfor(User::class);
-            $table->string('status')->default('pending');
-            $table->decimal('total_price', 6, 2);
-            $table->string('session_id');
+            $table->string('status')->default('unpaid');
+            $table->decimal('total_price', 6, 2)->nullable();
+            $table->string('session_id')->nullable();
             $table->timestamps();
         });
 

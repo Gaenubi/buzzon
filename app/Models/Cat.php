@@ -12,11 +12,11 @@ class Cat extends Model
 {
     use HasFactory;
 
-    public function Subcat(){
+    public function subcats(){
         return $this->hasMany(Subcat::class);
     }
 
-    public function Products(){
+    public function products(){
         return $this->hasManyThrough(Product::class, Subcat::class);
     }
 }

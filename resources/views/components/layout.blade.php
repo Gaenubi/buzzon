@@ -4,7 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{asset('css/style.css')}}" type="text/css">
-    <script type="test/javascript" src="{{asset('js/script.js') }}"></script>
+    @push('scripts')
+    <script src="{{asset('js/script.js')}}" defer></script>
+    @endpush
+    @push('cart')
+    <script src="{{asset('js/cart.js')}}" defer></script>
+    @endpush
+    @push('login')
+    <script src="{{asset('js/login.js')}}" defer></script>
+    @endpush
+    @stack('scripts')
     <title>Buzzon</title>
 </head>
 <body>
@@ -20,7 +29,10 @@
             </div>
         </div>
         <div class="Nav-item">
-        <button class="Nav-item searchbar" id="filtbtn"> Dropdown </button>
+            <div id="filtbtn">
+                <button class="Nav-item searchbar"> Dropdown </button>
+            </div>
+        
             <div class="Dropdown" id="filtdd"> 
                 <a href="#">All departments</a>
                 <a href="#">Arts and craft</a>
@@ -80,7 +92,7 @@
             <img src="" alt="">
             <h4>0</h4>
             </div>
-            <a class="link" href="/view/cart">Cart</a>
+            <a class="link" href="cart">Cart</a>
         </div>
     </div>
     <div class="bop-nav">
@@ -101,5 +113,3 @@
         <a href="sell"><button>Sell</button></a>
     </div>
     {{$slot}}
-</body>
-</html>
